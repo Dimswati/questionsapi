@@ -1,0 +1,71 @@
+@import "../../global.scss";
+
+.questions{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+
+    .question{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        position: relative;
+
+        &::after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -1.5rem;
+            background-color: #DBDEF0;
+        }
+
+        h2{
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        .choices{
+            display: flex;
+            gap: 1.2rem;
+
+            button{
+                background-color: transparent;
+                padding: 5px 15px;
+                border: 2px solid var(--button);
+                border-radius: 10px;
+                font-family: 'Karla', sans-serif;
+                font-size: 18px;
+                cursor: pointer;
+                color: var(--text-color);
+            }
+
+            .choosed{
+                background-color: #D6DBF5;
+                border: none;
+            }
+
+            .correct{
+                background-color: #94D7A2;
+                border: none;
+            }
+        }
+    }
+
+    .check{
+        margin-top: 1rem;
+        align-self: center;
+        width: 40%;
+        padding: 15px 8px;
+        border: none;
+        border-radius: 15px;
+        font-size: 18px;
+        background-color: var(--button);
+        color: #FFFFFF;
+        font-family: 'Karla', sans-serif;
+        cursor: pointer;
+    }
+}
