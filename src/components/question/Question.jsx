@@ -1,7 +1,15 @@
 import React from 'react'
 
 export default function Question({question}) {
-    const choices = []
+
+
+    // let choices = [correctAnswer];
+
+    // question.incorrect_answers.array.map(choice => {
+    // });
+
+    // console.log(question)
+
   return (
     <div className="question">
         <h2>How would one say goodbye in Spanish?</h2>

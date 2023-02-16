@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import './App.scss';
 // import Landing from './components/Landing/Landing';
 import Questions from './components/questions/Questions';
@@ -6,6 +7,10 @@ import Questions from './components/questions/Questions';
 function App() {
 
   const [questions, setQuestions] = useState(()=> JSON.parse(localStorage.getItem("questions")) || [])
+
+  function setQuestionsId(arr){
+    return arr.map(question => ({...question, id: nanoid()}))  
+  }
 
   //get data from api
   useEffect(()=>{
@@ -18,8 +23,10 @@ function App() {
       }
 
       const data = await response.json()
-      localStorage.setItem("questions", JSON.stringify(data.results))
-      console.log(data.results)
+      const idsetData = setQuestionsId(data.results)
+
+      localStorage.setItem("questions", JSON.stringify(idsetData))
+      console.log(idsetData)
 
      }catch(error){
       alert(`check your internet connection ${error}`)
