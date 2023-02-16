@@ -1,23 +1,26 @@
-import React from 'react'
-
-export default function Question({question}) {
+export default function Question({question, updateAnswer}) {
 
 
-    // let choices = [correctAnswer];
+    const {correct_answer, incorrect_answers} = question;
 
-    // question.incorrect_answers.array.map(choice => {
-    // });
+    const choices = [...incorrect_answers, correct_answer].map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
 
-    // console.log(question)
+    function choosedAnswer(event){
+      
+    } 
 
   return (
     <div className="question">
-        <h2>How would one say goodbye in Spanish?</h2>
+        <h2>{question.question}</h2>
         <div className="choices">
-            <button className="choosed">Adiós</button>
-            <button>Hola</button>
-            <button>Au Revoir</button>
-            <button>Salir</button>
+            {/* <button className="choosed">Adiós</button> */}
+            {
+              choices.map(choice => {
+                return (
+                <button onClick={choosedAnswer}>{choice}</button>
+                )
+              })
+            }
         </div>
     </div>
   )

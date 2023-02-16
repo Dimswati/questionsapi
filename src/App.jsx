@@ -8,6 +8,19 @@ function App() {
 
   const [questions, setQuestions] = useState(()=> JSON.parse(localStorage.getItem("questions")) || [])
 
+  const answeredQuestions =  []
+
+  function updateAnswer(event, id){
+    console.log(event.id)
+    console.log(id)
+  }
+
+  function showAnswers(){
+    if(answeredQuestions.length === questions.length){
+      console.log("answered all questions")
+    }
+  }
+
   function setQuestionsId(arr){
     return arr.map(question => ({...question, id: nanoid()}))  
   }
@@ -38,7 +51,7 @@ function App() {
 
   return (
     <div className="App">
-      <Questions questions={questions}/>
+      <Questions questions={questions} showAnswers={showAnswers} updateAnswer={updateAnswer}/>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import Question from "../question/Question";
 import "./questions.scss";
 
-export default function Questions({questions}) {
+export default function Questions({questions, showAnswers, updateAnswer}) {
   return (
         <div className="questions">
             {questions.map(question => <Question key={question.id} question={question}/>)}
-            <button className="check">Check answers</button>
+            <button className="check" onClick={showAnswers}>Check answers</button>
         </div>
     
   )
