@@ -27,6 +27,7 @@ export default function Question({question, updateAnswer}) {
       })
     })
 
+    updateAnswer(question.id, ...choices.filter(choice => choice.id === id))
   }
 
 

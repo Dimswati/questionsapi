@@ -10,13 +10,14 @@ function App() {
 
   const answeredQuestions =  []
 
-  function updateAnswer(questionId, choosedAnswer){
-    
+  function updateAnswer(questionId, {choice}){
+    console.log(questionId)
+    console.log(choice)
   }
 
-  function hasPassed(){
+  // function hasPassed(){
     
-  }
+  // }
 
   function showAnswers(){
     if(answeredQuestions.length === questions.length){
