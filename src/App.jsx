@@ -10,9 +10,12 @@ function App() {
 
   const answeredQuestions =  []
 
-  function updateAnswer(event, id){
-    console.log(event.id)
-    console.log(id)
+  function updateAnswer(questionId, choosedAnswer){
+    
+  }
+
+  function hasPassed(){
+    
   }
 
   function showAnswers(){
