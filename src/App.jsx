@@ -6,13 +6,24 @@ import Questions from './components/questions/Questions';
 
 function App() {
 
+  // const [answeredQuestions, setAnsweredQuestions] = useState([])
+
   const [questions, setQuestions] = useState(()=> JSON.parse(localStorage.getItem("questions")) || [])
 
-  const answeredQuestions =  []
-
   function updateAnswer(questionId, {choice}){
-    console.log(questionId)
-    console.log(choice)
+    // const [question] = questions.filter(question => question.id === questionId)
+
+    setQuestions(prevQuestions => {
+      return prevQuestions.map(question => {
+       return question.id === questionId ?
+              {
+                ...question,
+                choosed: choice,
+              } : {...question}
+      })
+    })
+
+    console.log(questions)
   }
 
   // function hasPassed(){
@@ -20,9 +31,7 @@ function App() {
   // }
 
   function showAnswers(){
-    if(answeredQuestions.length === questions.length){
-      console.log("answered all questions")
-    }
+
   }
 
   function setQuestionsId(arr){
@@ -46,7 +55,7 @@ function App() {
       console.log(idsetData)
 
      }catch(error){
-      alert(`check your internet connection ${error}`)
+      console.error(error)
      }
     }
 

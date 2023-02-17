@@ -15,7 +15,10 @@ export default function Question({question, updateAnswer}) {
 
   const [choices, setChoices] = useState(choiceArr)
 
-  function choosedAnswer(id){
+  function choosedAnswer(event ,id){
+    const choice = event.target.textContent;
+
+    updateAnswer(question.id, choice)
 
     setChoices(prevChoices => {
       return prevChoices.map(choice => {
@@ -27,7 +30,6 @@ export default function Question({question, updateAnswer}) {
       })
     })
 
-    updateAnswer(question.id, ...choices.filter(choice => choice.id === id))
   }
 
 
@@ -41,7 +43,7 @@ export default function Question({question, updateAnswer}) {
             {
               choices.map((choice) => {
                 return (
-                  <Choice key={choice.id} choosedAnswer={()=>{choosedAnswer(choice.id)}} choice={choice}/>
+                  <Choice key={choice.id} choosedAnswer={(event)=>{choosedAnswer(event, choice.id)}} choice={choice}/>
                 )
               })
             }
