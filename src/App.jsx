@@ -6,33 +6,32 @@ import Questions from './components/questions/Questions';
 
 function App() {
 
-  // const [answeredQuestions, setAnsweredQuestions] = useState([])
-
   const [questions, setQuestions] = useState(()=> JSON.parse(localStorage.getItem("questions")) || [])
 
-  function updateAnswer(questionId, {choice}){
-    // const [question] = questions.filter(question => question.id === questionId)
+  const [showAnswer, setShowAnswer] = useState(false)
 
-    setQuestions(prevQuestions => {
-      return prevQuestions.map(question => {
-       return question.id === questionId ?
-              {
-                ...question,
-                choosed: choice,
-              } : {...question}
-      })
-    })
-
-    console.log(questions)
+  function checkAnswer(){
+    setShowAnswer(prevState => !prevState)
   }
 
-  // function hasPassed(){
+  // function updateAnswer(questionId, choice){
     
+  //   setQuestions(prevQuestions => {
+  //     return prevQuestions.map(question => {
+  //      return question.id === questionId ?
+  //             {
+  //               ...question,
+  //               choosed: choice,
+  //             } : {...question}
+  //     })
+  //   })
+
+  //   console.log(questionId)
   // }
 
-  function showAnswers(){
-
-  }
+  // function getMoreQuestions(){
+  //   setQuestions()
+  // }
 
   function setQuestionsId(arr){
     return arr.map(question => ({...question, id: nanoid()}))  
@@ -64,7 +63,7 @@ function App() {
 
   return (
     <div className="App">
-      <Questions questions={questions} showAnswers={showAnswers} updateAnswer={updateAnswer}/>
+      <Questions questions={questions} checkAnswer={checkAnswer} answerCheck={showAnswer}/>
     </div>
   );
 }

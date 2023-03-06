@@ -1,24 +1,25 @@
 import { useState } from "react";
 import Choice from "../choice/Choice";
 
-export default function Question({question, updateAnswer}) {
+export default function Question({question, answerCheck}) {
 
   const {correct_answer, incorrect_answers} = question
 
-  const choiceArr = [...incorrect_answers, correct_answer].map((element, index) => {
-    return {
-      id: index + 1,
-      choice: element,
-      choosed: false
-    }
+  //set choices for questions
+  const choiceArr = [...incorrect_answers, correct_answer].map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value).map((element, index) => {
+      return {
+        id: index + 1,
+        choice: element,
+        choosed: false,
+        correctAns: element !== correct_answer ? false : true
+      }
   })
 
   const [choices, setChoices] = useState(choiceArr)
 
   function choosedAnswer(event ,id){
-    const choice = event.target.textContent;
 
-    updateAnswer(question.id, choice)
+    if (answerCheck) return
 
     setChoices(prevChoices => {
       return prevChoices.map(choice => {
@@ -32,9 +33,11 @@ export default function Question({question, updateAnswer}) {
 
   }
 
+  // function showAnswer(){
 
-  // map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+  // }
 
+  console.log(choiceArr)
   return (
     <div className="question">
         <h2>{question.question}</h2>
@@ -43,7 +46,7 @@ export default function Question({question, updateAnswer}) {
             {
               choices.map((choice) => {
                 return (
-                  <Choice key={choice.id} choosedAnswer={(event)=>{choosedAnswer(event, choice.id)}} choice={choice}/>
+                  <Choice key={choice.id} choosedAnswer={(event)=>{choosedAnswer(event, choice.id)}} choice={choice} answerCheck={answerCheck}/>
                 )
               })
             }
