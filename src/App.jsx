@@ -1,37 +1,27 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import './App.scss';
-// import Landing from './components/Landing/Landing';
+import Landing from './components/Landing/Landing';
 import Questions from './components/questions/Questions';
 
 function App() {
 
+  // set the questions state
   const [questions, setQuestions] = useState(()=> JSON.parse(localStorage.getItem("questions")) || [])
 
+  // set the show answer state
   const [showAnswer, setShowAnswer] = useState(false)
+
+  // set the updating questions state when user clicks on get more questions
+  const [moreQuestions, setMoreQuestions] = useState({
+    status: false,
+    amount: 10,
+    difficulty: 'medium'
+  })
 
   function checkAnswer(){
     setShowAnswer(prevState => !prevState)
   }
-
-  // function updateAnswer(questionId, choice){
-    
-  //   setQuestions(prevQuestions => {
-  //     return prevQuestions.map(question => {
-  //      return question.id === questionId ?
-  //             {
-  //               ...question,
-  //               choosed: choice,
-  //             } : {...question}
-  //     })
-  //   })
-
-  //   console.log(questionId)
-  // }
-
-  // function getMoreQuestions(){
-  //   setQuestions()
-  // }
 
   function setQuestionsId(arr){
     return arr.map(question => ({...question, id: nanoid()}))  
@@ -51,7 +41,7 @@ function App() {
       const idsetData = setQuestionsId(data.results)
 
       localStorage.setItem("questions", JSON.stringify(idsetData))
-      console.log(idsetData)
+      // console.log(idsetData)
 
      }catch(error){
       console.error(error)
@@ -59,11 +49,15 @@ function App() {
     }
 
     getQuestions()
-  }, [questions])
+  }, [moreQuestions])
+
+  if(moreQuestions.status){
+    return <Landing/>
+  }
 
   return (
     <div className="App">
-      <Questions questions={questions} checkAnswer={checkAnswer} answerCheck={showAnswer}/>
+      <Questions questions={questions} checkAnswer={checkAnswer} showAnswer={showAnswer}/>
     </div>
   );
 }
